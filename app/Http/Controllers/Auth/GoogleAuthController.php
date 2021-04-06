@@ -22,7 +22,6 @@ class GoogleAuthController extends Controller
             
             $googleUser = Socialite::driver('google')->stateless()->user();
             $user = User::where('email', $googleUser->email)->first();
-
             if(! $user){
                 $user = User::create([
                     'name' => $googleUser->name,

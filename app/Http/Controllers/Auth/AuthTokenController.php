@@ -35,6 +35,7 @@ class AuthTokenController extends Controller
         $status = ActiveCode::verifyCode($request->token , $user);
 
         if(! $status){
+            alert()->error('کد صحیح نبود');
             return redirect(route('login'));
         }
 

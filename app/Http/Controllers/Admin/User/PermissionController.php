@@ -19,6 +19,7 @@ class PermissionController extends Controller
         $user->permissions()->sync($request->permissions);
         $user->roles()->sync($request->roles);
         
+        alert()->success('مطلب مورد نظر شما با موفقیت ثبت شد');
         return redirect(route('admin.users.index'));
     }
 }

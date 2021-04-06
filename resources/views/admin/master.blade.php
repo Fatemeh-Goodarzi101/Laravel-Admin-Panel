@@ -6,6 +6,8 @@
   <title>پنل مدیریت | داشبورد اول</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -28,7 +30,7 @@
   <link rel="stylesheet" href="/plugins/select2/select2.css">
 
   <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-
+  @yield('head')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -46,7 +48,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حسام موسوی</a>.</strong>
+    <strong> 2021 &copy; <a target="blank" href="http://fatemehgoodarzi.com/">فاطمه گودرزی</a></strong>
   </footer>
 
   <!-- Control Sidebar -->
@@ -92,5 +94,6 @@
 <script src="/plugins/select2/select2.full.js"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
 @yield('script')
+@include('sweet::alert')
 </body>
 </html>

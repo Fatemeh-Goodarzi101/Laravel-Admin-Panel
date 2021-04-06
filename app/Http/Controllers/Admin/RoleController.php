@@ -61,6 +61,8 @@ class RoleController extends Controller
         $role = Role::create($data);
         $role->permissions()->sync($data['permissions']);
         
+        alert()->success('مطلب مورد نظر شما با موفقیت ایجاد شد');
+
         return redirect(route('admin.roles.index'));
     }
 
@@ -104,6 +106,8 @@ class RoleController extends Controller
         $role->update($data);
         $role->permissions()->sync($data['permissions']);
         
+        alert()->success('مطلب مورد نظر شما با موفقیت ویرایش شد');
+
         return redirect(route('admin.roles.index'));
     }
 
@@ -116,6 +120,8 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
+        alert()->success('مطلب مورد نظر شما با موفقیت حذف شد');
+        
         return back();
     }
 }

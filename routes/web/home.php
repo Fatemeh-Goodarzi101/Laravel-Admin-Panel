@@ -4,12 +4,21 @@ use App\Http\Controllers\Auth\AuthTokenController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleAuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Profile\IndexController;
+use App\Http\Controllers\Profile\TokenAuthController;
+use App\Http\Controllers\Profile\TwoFactorAuthController;
 use App\Models\ActiveCode;
+use App\Models\Comment;
 use App\Models\Permission;
+use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
 use App\Notifications\LoginNotification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
+use Morilog\Jalali\Jalalian;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +47,19 @@ Route::post('/auth/token' , [AuthTokenController::class, 'postToken']);
 
 
 Route::prefix('profile')->middleware('auth')->group(function(){  
-    Route::get('/' , [App\Http\Controllers\Profile\IndexController::class, 'index'])->name('profile');
-    Route::get('twofactor' , [App\Http\Controllers\Profile\TwoFactorAuthController::class, 'manageTwoFactor'])->name('profile.2fa.manage');
-    Route::post('twofactor' , [App\Http\Controllers\Profile\TwoFactorAuthController::class, 'postManageTwoFactor']);
+    Route::get('/' , [IndexController::class, 'index'])->name('profile');
+    Route::get('twofactor' , [TwoFactorAuthController::class, 'manageTwoFactor'])->name('profile.2fa.manage');
+    Route::post('twofactor' , [TwoFactorAuthController::class, 'postManageTwoFactor']);
 
-    Route::get('twofactor/phone' , [App\Http\Controllers\Profile\TokenAuthController::class, 'getPhoneVerifyCode'])->name('profile.2fa.phone');
-    Route::post('twofactor/phone' , [App\Http\Controllers\Profile\TokenAuthController::class, 'postPhoneVerifyCode']);
+    Route::get('twofactor/phone' , [TokenAuthController::class, 'getPhoneVerifyCode'])->name('profile.2fa.phone');
+    Route::post('twofactor/phone' , [TokenAuthController::class, 'postPhoneVerifyCode']);
+});
+
+
+Route::get('products' , [ProductController::class , 'index']);
+Route::get('products/{product}' , [ProductController::class , 'single']);
+
+Route::post('comments' , [HomeController::class , 'comment'])->name('send.comment');
+Route::get('cart' , function() {
+    dd(Cart::get('2'));
 });

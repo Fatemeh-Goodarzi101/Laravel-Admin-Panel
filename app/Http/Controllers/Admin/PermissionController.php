@@ -58,6 +58,7 @@ class PermissionController extends Controller
         ]);
         
         Permission::create($data);
+        alert()->success('مطلب مورد نظر شما با موفقیت ایجاد شد');
         
         return redirect(route('admin.permissions.index'));
     }
@@ -100,6 +101,7 @@ class PermissionController extends Controller
         ]);
 
         $permission->update($data);
+        alert()->success('مطلب مورد نظر شما با موفقیت ویرایش شد');
         
         return redirect(route('admin.permissions.index'));
     }
@@ -113,6 +115,7 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->delete();
+        alert()->success('مطلب مورد نظر شما با موفقیت حذف شد');
         return back();
     }
 }
