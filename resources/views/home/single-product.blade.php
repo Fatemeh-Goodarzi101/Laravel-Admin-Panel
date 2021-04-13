@@ -78,8 +78,14 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         {{ $product->title }}
+                        @if (Cart::count($product) < $product->inventory)
+                            <form action="{{ route('cart.add' , $product->id) }}" method="post" id="add-to-cart">
+                                @csrf
+                            </form>
+                            <span onclick="document.getElementById('add-to-cart').submit()" class="btn btn-sm btn-danger">افزودن به سبد خرید</span>
+                        @endif
                     </div>
 
                     <div class="card-body">

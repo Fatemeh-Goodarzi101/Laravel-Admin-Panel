@@ -4,9 +4,12 @@ use App\Http\Controllers\Auth\AuthTokenController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleAuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Profile\IndexController;
+use App\Http\Controllers\Profile\OrderController;
 use App\Http\Controllers\Profile\TokenAuthController;
 use App\Http\Controllers\Profile\TwoFactorAuthController;
 use App\Models\ActiveCode;
@@ -39,6 +42,24 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::middleware('auth')->group(function() {
+    Route::prefix('profile')->group(function(){  
+        Route::get('/' , [IndexController::class, 'index'])->name('profile');
+        Route::get('twofactor' , [TwoFactorAuthController::class, 'manageTwoFactor'])->name('profile.2fa.manage');
+        Route::post('twofactor' , [TwoFactorAuthController::class, 'postManageTwoFactor']);
+    
+        Route::get('twofactor/phone' , [TokenAuthController::class, 'getPhoneVerifyCode'])->name('profile.2fa.phone');
+        Route::post('twofactor/phone' , [TokenAuthController::class, 'postPhoneVerifyCode']);
+
+        Route::get('orders' , [OrderController::class , 'index'])->name('profile.orders');
+        Route::get('orders/{order}' , [OrderController::class , 'showDetails'])->name('profile.orders.detail');
+        Route::get('orders/{order}/payment' , [OrderController::class , 'payment'])->name('profile.orders.payment');
+    });
+
+    Route::post('comments' , [HomeController::class , 'comment'])->name('send.comment');
+    Route::post('payment' , [PaymentController::class , 'payment'])->name('cart.payment');
+    Route::get('payment/callback' , [PaymentController::class , 'callback'])->name('payment.callback');
+});
 
 Route::get('/auth/google' , [GoogleAuthController::class, 'redirect'])->name('auth.google');
 Route::get('/auth/google/callback' , [GoogleAuthController::class, 'callback']);
@@ -46,20 +67,11 @@ Route::get('/auth/token' , [AuthTokenController::class, 'getToken'])->name('2fa.
 Route::post('/auth/token' , [AuthTokenController::class, 'postToken']);
 
 
-Route::prefix('profile')->middleware('auth')->group(function(){  
-    Route::get('/' , [IndexController::class, 'index'])->name('profile');
-    Route::get('twofactor' , [TwoFactorAuthController::class, 'manageTwoFactor'])->name('profile.2fa.manage');
-    Route::post('twofactor' , [TwoFactorAuthController::class, 'postManageTwoFactor']);
-
-    Route::get('twofactor/phone' , [TokenAuthController::class, 'getPhoneVerifyCode'])->name('profile.2fa.phone');
-    Route::post('twofactor/phone' , [TokenAuthController::class, 'postPhoneVerifyCode']);
-});
-
-
 Route::get('products' , [ProductController::class , 'index']);
 Route::get('products/{product}' , [ProductController::class , 'single']);
 
-Route::post('comments' , [HomeController::class , 'comment'])->name('send.comment');
-Route::get('cart' , function() {
-    dd(Cart::get('2'));
-});
+
+Route::get('cart' , [CartController::class , 'cart']);
+Route::post('cart/add/{product}' , [CartController::class , 'addToCart'])->name('cart.add');
+Route::patch('/cart/quantity/change' , [CartController::class , 'quantityChange']);
+Route::delete('cart/delete/{cart}' , [CartController::class , 'deleteFromCart'])->name('cart.destroy');

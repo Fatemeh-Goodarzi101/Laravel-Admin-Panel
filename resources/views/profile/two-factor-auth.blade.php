@@ -1,7 +1,7 @@
 @extends('profile.layout')
 
 @section('main')
-    <h4> Two Factor Auth: </h4>
+    <h4> احراز هویت دو مرحله ای: </h4>
     <hr>
 
     @if ($errors->any())
@@ -18,7 +18,7 @@
         @csrf
 
         <div class="form-group">
-            <label for="type">Type</label>
+            <label for="type">نوع احراز هویت</label>
             <select name="type" id="type" class="form-control">
                 @foreach (config('twofactor.types') as $key => $name)
                     <option value="{{ $key }}" {{ old('type') == $key || auth()->user()->hasTwoFactor($key) ? 'selected' : '' }}>{{ $name }}</option>
@@ -27,13 +27,13 @@
         </div>
 
         <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" name="phone" id="phone" class="form-control" placeholder="Please add your phone number..." value="{{ old('phone') ?? auth()->user()->phone_number }}">
+            <label for="phone">شماره تلفن</label>
+            <input type="text" name="phone" id="phone" class="form-control" placeholder="لطفا شماره تماس خود را وارد کنید..." value="{{ old('phone') ?? auth()->user()->phone_number }}">
         </div>
 
         <div class="form-group">
             <button class="btn btn-primary">
-                Update
+                ارسال
             </button>
         </div>
     </form>

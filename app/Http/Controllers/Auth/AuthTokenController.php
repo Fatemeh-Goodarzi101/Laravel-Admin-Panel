@@ -17,7 +17,7 @@ class AuthTokenController extends Controller
 
         $request->session()->reflash();
 
-        return view('auth.token');
+        return view('auth.token'); 
     }
 
     public function postToken(Request $request)

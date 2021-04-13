@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
@@ -28,3 +29,6 @@ Route::resource('comments' , CommentController::class)->only(['index' , 'update'
 Route::get('comments/unapproved' , [CommentController::class , 'unapproved'])->name('comments.unapproved');
 
 Route::resource('categories' , CategoryController::class);
+
+Route::resource('orders' , OrderController::class);
+Route::get('orders/{order}/orders' , [OrderController::class , 'payments'])->name('orders.payments');
