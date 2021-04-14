@@ -59,6 +59,7 @@
                               <a href="{{ route('admin.products.edit' , $product->id) }}" class="btn btn-sm btn-primary ml-2">ویرایش</a>
                             @endcan
                             
+                            <a href="{{ route('admin.products.gallery.index' , ['product' => $product->id ]) }}" class="btn btn-sm btn-warning ml-1">گالری تصاویر</a>
                         </td>
                     </tr>
                 @endforeach

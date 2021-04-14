@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Notifications\LoginNotification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Morilog\Jalali\Jalalian;
 
 /*

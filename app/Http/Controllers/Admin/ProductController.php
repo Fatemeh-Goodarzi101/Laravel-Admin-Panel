@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use UxWeb\SweetAlert\SweetAlert;
 // use SweetAlert;
 class ProductController extends Controller
@@ -22,7 +24,7 @@ class ProductController extends Controller
             $products->where('title' , 'LIKE' , "%{$keyword}%")->orWhere('id' , 'LIKE' , "%{$keyword}%");
         }
 
-        $products =$products->paginate(10);
+        $products =$products->latest()->paginate(10);
         return view('admin.products.all' , compact('products'));
     }
 
@@ -45,18 +47,20 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validData = $request->validate([
-            'title' => ['required'],
-            'description' => ['required'],
-            'price' => ['required' , 'integer'],
-            'inventory' => ['required' , 'integer'],
-            'categories' => ['required'],
-            'attributes' => 'array'
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required|integer',
+            'inventory' => 'required|integer',
+            'categories' => 'required',
+            'attributes' => 'array',
+            'image' => 'required'
         ]);
 
         $product = auth()->user()->products()->create($validData);
         $product->categories()->sync($validData['categories']);
 
-        $this->attachAttributesToProduct($product , $validData);
+        if(isset($validData['attributes']))
+            $this->attachAttributesToProduct($product , $validData);
 
         alert()->success('محصول مورد نظر با موفقیت ثبت شد' , 'با تشکر');
 
@@ -87,19 +91,25 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validData = $request->validate([
-            'title' => ['required'],
-            'description' => ['required'],
-            'price' => ['required' , 'integer'],
-            'inventory' => ['required' , 'integer'],
-            'categories' => ['required'],
-            'attributes' => ['required'],
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required' , 'integer',
+            'inventory' => 'required' , 'integer',
+            'categories' => 'required',
+            'attributes' => 'array',
+            // 'image' => 'required'
         ]);
     
+        Storage::disk('public')->putFileAs('files' , $request->file('file') , $request->file('file')->getClientOriginalName());
+        return 'ok';
+
         $product->update($validData);
         $product->categories()->sync($validData['categories']);
 
         $product->attributes()->detach();
-        $this->attachAttributesToProduct($product , $validData);
+
+        if(isset($validData['attributes']))
+            $this->attachAttributesToProduct($product , $validData);
         
         alert()->success('محصول مورد نظر با موفقیت ویرایش شد' , 'با تشکر');
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductGalleryController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\User\PermissionController as UserPermissionController;
 use App\Http\Controllers\Admin\User\UserController;
@@ -23,6 +24,7 @@ Route::resource('permissions' , PermissionController::class);
 Route::resource('roles' , RoleController::class);
 
 Route::resource('products' , ProductController::class);
+Route::resource('products.gallery' , ProductGalleryController::class);
 Route::post('attribute/values' , [AttributeController::class , 'getValues']);
 
 Route::resource('comments' , CommentController::class)->only(['index' , 'update' , 'destroy']);

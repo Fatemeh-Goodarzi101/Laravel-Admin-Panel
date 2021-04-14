@@ -6,11 +6,35 @@
     @endslot
     
     @slot('script')
+
+        <script src="/js/ckeditor/ckeditor.js"></script>
+        {{-- <script src="/js/ckeditor5-build-classic/ckeditor.js"></script> --}}
+
         <script>
+            CKEDITOR.replace('description', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
+            
+            // ClassicEditor
+            //     .create( document.querySelector( '#description' ) )
+            //     .catch( error => {
+            //         console.error( error );
+            //     } );
+
+            document.addEventListener("DOMContentLoaded", function() {
+
+                document.getElementById('button-image').addEventListener('click', (event) => {
+                    event.preventDefault();
+                    window.open('/file-manager/fm-button', 'fm', 'width=1200,height=600');
+                });
+            });
+
+            // set file link
+            function fmSetLink($url) {
+                document.getElementById('image_label').value = $url;
+            }
+
             $('#categories').select2({
                 'placeholder' : 'دسته بندی مورد نظر را انتخاب کنید'
             })
-
 
             let changeAttributeValues = (event , id) => {
                 let valueBox = $(`select[name='attributes[${id}][value]']`);
@@ -105,7 +129,7 @@
             <!-- /.card-header -->
             <!-- form start -->
             <div id="attributes" data-attributes="{{ json_encode(\App\Models\Attribute::all()->pluck('name')) }}"></div>
-            <form class="form-horizontal" method="POST" action="{{ route('admin.products.store') }}">
+            <form class="form-horizontal" method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
               @csrf
               <div class="card-body">
                 <div class="form-group col-sm-10">
@@ -123,6 +147,15 @@
                 <div class="form-group col-sm-10">
                     <label for="inventory" class="col-sm-2 control-label">موجودی محصول</label>
                     <input type="number" name="inventory" class="form-control" id="inventory" placeholder="موجودی محصول را وارد کنید" value="{{ old('inventory') }}">
+                </div>
+                <div class="form-group col-sm-10">
+                    <label class="col-sm-2 control-label">آپلود تصویر شاخص</label>
+                    <div class="input-group">
+                        <input type="text" id="image_label" class="form-control" name="image">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-image">انتخاب</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group col-sm-10">
                   <label for="lable" class="col-sm-2 control-label">دسته بندی ها</label>
