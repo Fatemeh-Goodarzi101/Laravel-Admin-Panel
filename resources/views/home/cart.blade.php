@@ -72,7 +72,15 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="text-right font-weight-semibold align-middle p-4">{{ $product->price }}تومان</td>
+                                    @if ( ! $cart['discount_percent'] )
+                                        <td class="text-right font-weight-semibold align-middle p-4">{{ $product->price }}تومان</td> 
+                                    @else
+                                        <td class="text-right font-weight-semibold align-middle p-4">
+                                            <del class="text-danger text-sm"> {{ $product->price }}تومان </del>
+                                            <span>{{ $product->price -  ($product->price * $cart['discount_percent']) }}تومان </span>
+                                        </td>
+                                    @endif
+                                    
                                     <td class="align-middle p-4">
                                         <select onchange="changeQuantity(event , '{{ $cart['id'] }}' , 'cart-digikala')" class="form-control text-center">
                                             @foreach (range(1 , $product->inventory) as $item)
@@ -80,7 +88,14 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td class="text-right font-weight-semibold align-middle p-4">تومان {{ $product->price * $cart['quantity'] }}</td>
+                                    @if ( ! $cart['discount_percent'] )
+                                        <td class="text-right font-weight-semibold align-middle p-4">تومان {{ $product->price * $cart['quantity'] }}</td>
+                                    @else
+                                        <td class="text-right font-weight-semibold align-middle p-4">
+                                            <del class="text-danger text-sm"> {{ $product->price * $cart['quantity'] }}تومان </del>
+                                            <span>{{ ($product->price - ($product->price * $cart['discount_percent'])) * $cart['quantity'] }}تومان </span>
+                                        </td>
+                                    @endif
                                     <td class="text-center align-middle px-0">
                                         <form action="{{ route('cart.destroy' , $cart['id']) }}" id="delete-cart-{{ $product->id }}" method="post">
                                             @csrf
@@ -96,17 +111,40 @@
                 </div>
                 <!-- / Shopping cart table -->
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-                    <div class="mt-4"></div>
+                    @if ( $discount = Cart::getDiscount())
+                        <div class="mt-4">
+                            <form action="/discount/delete" method="post" id="delete-discount">
+                                @method('delete')
+                                @csrf
+                                <input type="hidden" name="cart" value="cart-digikala">
+                            </form>
+                            <span>کد تخفیف فعال : 
+                                <span class="text-success">{{ $discount->code }}</span>
+                                <a href="" class="badge badge-danger" onclick="event.preventDefault();document.getElementById('delete-discount').submit()">حذف کد</a> 
+                                <div>درصد تخفیف : 
+                                    <span class="text-success">{{ $discount->percent }}درصد </span>
+                                </div>
+                            </span>
+                        </div>
+                    @else
+                        <form action="{{ route('cart.discount.check') }}" method="POST" class="mt-4">
+                            @csrf 
+                            <input type="hidden" name="cart" value="cart-digikala">
+                            <input type="text" name="discount" class="form-control" placeholder="کد تخفیف دارید؟">
+                            <button type="submit" class="btn btn-success mt-2">اعمال تخفیف</button>
+                            @if ($errors->has('discount'))
+                                <div class="text-danger text-sm mt-2">{{ $errors->first('discount') }}</div>
+                            @endif
+                        </form>
+                    @endif
                     <div class="d-flex">
-{{--                        <div class="text-right mt-4 mr-5">--}}
-{{--                            <label class="text-muted font-weight-normal m-0">Discount</label>--}}
-{{--                            <div class="text-large"><strong>$20</strong></div>--}}
-{{--                        </div>--}}
                         <div class="text-right mt-4">
                             <label class="text-muted font-weight-normal m-0">قیمت کل</label>
                             @php
                                 $totalPrice = Cart::all()->sum(function($cart) {
-                                    return $cart['product']->price * $cart['quantity'];
+                                    return $cart['discount_percent'] == 0 
+                                          ? $cart['product']->price * $cart['quantity']
+                                          : ( $cart['product']->price - ($cart['product']->price * $cart['discount_percent']) ) * $cart['quantity'];
                                 });
                             @endphp
                             <div class="text-large"><strong>{{ $totalPrice }} تومان</strong></div>

@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndexController as HomeIndexController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Profile\IndexController;
@@ -35,9 +37,7 @@ use Morilog\Jalali\Jalalian;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeIndexController::class , 'index']);
 
 Auth::routes(['verify' => true]);
 
@@ -76,3 +76,8 @@ Route::get('cart' , [CartController::class , 'cart']);
 Route::post('cart/add/{product}' , [CartController::class , 'addToCart'])->name('cart.add');
 Route::patch('/cart/quantity/change' , [CartController::class , 'quantityChange']);
 Route::delete('cart/delete/{cart}' , [CartController::class , 'deleteFromCart'])->name('cart.destroy');
+
+Route::prefix('discount')->middleware('auth')->group(function() {
+    Route::post('check', [DiscountController::class , 'check'])->name('cart.discount.check');
+    Route::delete('delete' , [DiscountController::class , 'destroy']);
+});

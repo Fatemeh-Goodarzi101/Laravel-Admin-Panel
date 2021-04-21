@@ -17,6 +17,10 @@ class AuthTokenController extends Controller
 
         $request->session()->reflash();
 
+        $this->seo()
+        ->setTitle('احراز هویت دو مرحله ای')
+        ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         return view('auth.token'); 
     }
 

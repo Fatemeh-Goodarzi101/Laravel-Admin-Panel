@@ -3,6 +3,7 @@
 namespace App\Helpers\Cart;
 
 use Illuminate\Support\ServiceProvider;
+use App\Helpers\Cart\CartService;
 
 class CartServiceProvider extends ServiceProvider
 {

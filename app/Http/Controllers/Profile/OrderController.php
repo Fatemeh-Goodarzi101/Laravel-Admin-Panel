@@ -12,12 +12,20 @@ class OrderController extends Controller
 {
     public function index()
     {
+        $this->seo()
+        ->setTitle('لیست سفارشات')
+        ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $orders = auth()->user()->orders()->latest('created_at')->paginate(10);
         return view('profile.orders-list' , compact('orders'));
     }
 
     public function showDetails(Order $order)
     {
+        $this->seo()
+        ->setTitle('جزئیات سفارشات')
+        ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $this->authorize('view' , $order);
         return view('profile.order-detail' , compact('order'));
     }

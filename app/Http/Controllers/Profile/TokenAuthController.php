@@ -11,10 +11,13 @@ class TokenAuthController extends Controller
     public function getPhoneVerifyCode(Request $request)
     {
         if(! $request->session()->has('phone')){
-            return redirect(route('profile.2fa.manage'));
+            return redirect(route('profile.2fa.manage')); 
         }
         
         $request->session()->reflash();
+        $this->seo()
+        ->setTitle('تایید کد')
+        ->setDescription('به وب سایت دیجی کالا خوش امدید');
 
         return view('profile.phone-verify');
     }

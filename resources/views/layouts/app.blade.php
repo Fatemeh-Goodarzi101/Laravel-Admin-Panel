@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Digikala') }}</title>
+    {!! SEO::generate() !!}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -56,9 +56,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{ url('/profile') }}">پروفایل کاربری</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    @if (Auth::user()->isSuperUser())
+                                        <a style="text-align:right" class="dropdown-item" href="{{ url('/admin') }}">پنل مدیریت</a>
+                                    @endif
+                                    <a style="text-align:right" class="dropdown-item" href="{{ url('/profile') }}">پروفایل کاربری</a>
+                                    <a style="text-align:right" class="dropdown-item" href="{{ url('/cart') }}">سبد خرید</a>
+                                    <a style="text-align:right" class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('خروج از حساب') }}

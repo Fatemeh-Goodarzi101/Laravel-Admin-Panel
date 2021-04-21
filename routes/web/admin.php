@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
@@ -12,9 +14,8 @@ use App\Http\Controllers\Admin\User\PermissionController as UserPermissionContro
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route as Route;
 
-Route::get('/' , function() {
-    return view('admin.index');
-});
+
+Route::get('/' , [PanelController::class , 'index'])->name('admin');
 
 Route::resource('users' , UserController::class);
 Route::get('/users/{user}/permissions' , [UserPermissionController::class , 'create'])->name('users.permissions')->middleware('can:staff-user-permissions');
@@ -34,3 +35,5 @@ Route::resource('categories' , CategoryController::class);
 
 Route::resource('orders' , OrderController::class);
 Route::get('orders/{order}/orders' , [OrderController::class , 'payments'])->name('orders.payments');
+
+Route::resource('discounts' , DiscountController::class);

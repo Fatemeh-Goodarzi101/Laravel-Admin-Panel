@@ -12,6 +12,10 @@ class TwoFactorAuthController extends Controller
 {
     public function manageTwoFactor()
     {
+        $this->seo()
+        ->setTitle('احراز هویت دو مرحله ای')
+        ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         return view('profile.two-factor-auth');
     }
 

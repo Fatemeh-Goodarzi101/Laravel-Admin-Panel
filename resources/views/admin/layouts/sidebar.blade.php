@@ -121,7 +121,27 @@
                 </li>
               </ul>
             </li>
-          @endcan
+            @endcan
+
+            @can('show-discounts')
+              <li class="nav-item has-treeview {{ isActive(['admin.discounts.index' , 'admin.discounts.create' , 'admin.discounts.edit'] , 'menu-open') }}">
+                <a href="#" class="nav-link {{ isActive(['admin.discounts.index' , 'admin.discounts.create' , 'admin.discounts.edit']) }}">
+                  <i class="nav-icon fa fa-users"></i>
+                  <p>
+                    تخفیفات
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('admin.discounts.index') }}" class="nav-link {{ isActive('admin.discounts.index') }}">
+                      <i class="fa fa-circle-o nav-icon"></i>
+                      <p>لیست تخفیف ها</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            @endcan
 
             @can('show-comments')
               <li class="nav-item has-treeview {{ isActive(['admin.comments.index' , 'admin.products.update', 'admin.comments.unapproved'] , 'menu-open') }}">

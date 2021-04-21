@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Profile;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -10,9 +9,9 @@ class IndexController extends Controller
     public function index()
     {
         $this->seo()
-        ->setTitle('پروفایل شخصی')
+        ->setTitle('صفحه اصلی')
         ->setDescription('به وب سایت دیجی کالا خوش امدید');
 
-        return view('profile.index');
+        return view('home');
     }
 }
