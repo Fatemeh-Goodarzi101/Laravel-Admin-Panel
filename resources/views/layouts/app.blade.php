@@ -40,13 +40,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('ورود') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-user"></i>{{ __('ورود') }}</a>
                                 </li>
                             @endif
                             
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('ثبت نام') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}"><i class="fas fa-user"></i>{{ __('ثبت نام') }}</a>
                                 </li>
                             @endif
                         @else
@@ -57,14 +57,14 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if (Auth::user()->isSuperUser())
-                                        <a style="text-align:right" class="dropdown-item" href="{{ url('/admin') }}">پنل مدیریت</a>
+                                        <a style="text-align:right" class="dropdown-item" href="{{ url('/admin') }}"><i class="fas fa-tasks"></i>پنل مدیریت</a>
                                     @endif
-                                    <a style="text-align:right" class="dropdown-item" href="{{ url('/profile') }}">پروفایل کاربری</a>
-                                    <a style="text-align:right" class="dropdown-item" href="{{ url('/cart') }}">سبد خرید</a>
+                                    <a style="text-align:right" class="dropdown-item" href="{{ url('/profile') }}"><i class="fas fa-id-card"></i>پروفایل کاربری</a>
+                                    <a style="text-align:right" class="dropdown-item" href="{{ url('/cart') }}"><i class="fas fa-shopping-cart"></i>سبد خرید</a>
                                     <a style="text-align:right" class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('خروج از حساب') }}
+                                        <i class="fas fa-sign-out-alt"></i>{{ __('خروج از حساب') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -77,6 +77,7 @@
                 </div>
             </div>
         </nav>
+        @include('layouts.navbar')
         {{-- @include('layouts.list-categories' , ['categories' => \App\Models\Category::where('parent' , 0)->get()]) --}}
         <main class="py-4">
             @yield('content')

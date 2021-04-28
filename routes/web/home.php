@@ -68,8 +68,9 @@ Route::get('/auth/token' , [AuthTokenController::class, 'getToken'])->name('2fa.
 Route::post('/auth/token' , [AuthTokenController::class, 'postToken']);
 
 
-Route::get('products' , [ProductController::class , 'index']);
-Route::get('products/{product}' , [ProductController::class , 'single']);
+Route::get('categories/{category}' , [ProductController::class , 'index']);
+Route::get('categories' , [ProductController::class , 'index']);
+Route::get('products/{product}' , [ProductController::class , 'single'])->name('product.single');
 
 
 Route::get('cart' , [CartController::class , 'cart']);

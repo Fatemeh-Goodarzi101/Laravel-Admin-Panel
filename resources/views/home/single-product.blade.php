@@ -84,7 +84,7 @@
                             <form action="{{ route('cart.add' , $product->id) }}" method="post" id="add-to-cart">
                                 @csrf
                             </form>
-                            <span onclick="document.getElementById('add-to-cart').submit()" class="btn btn-sm btn-danger">افزودن به سبد خرید</span>
+                            <button><a onclick="document.getElementById('add-to-cart').submit()" class="btn btn-sm btn-danger">افزودن به سبد خرید</a></button>
                         @endif
                     </div>
 
@@ -105,7 +105,7 @@
                <div class="d-flex align-items-center justify-content-between">
                    <h4 class="mt-4">بخش نظرات</h4>
                    @auth
-                       <span class="btn btn-sm btn-primary" data-toggle="modal" data-target="#sendComment" data-id="0">ثبت نظر جدید</span>
+                       <button><a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#sendComment" data-id="0">ثبت نظر جدید</a></button>
                    @endauth
                </div>
 

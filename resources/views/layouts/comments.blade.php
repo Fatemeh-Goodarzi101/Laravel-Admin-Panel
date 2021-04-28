@@ -9,7 +9,7 @@
          </div>
          @auth
              @if($comment->parent_id == 0)
-                <span class="btn btn-sm btn-primary" data-toggle="modal" data-target="#sendComment" data-id="{{ $comment->id }}">پاسخ به نظر</span>
+                <button><a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#sendComment" data-id="{{ $comment->id }}">پاسخ به نظر</a></button>
              @endif
          @endauth
      </div>

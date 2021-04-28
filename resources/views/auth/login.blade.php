@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <div class="col-md-8 offset-md-4 mb-3">
-                    <a href="{{ route('auth.google') }}" class="btn btn-danger">ورود از طریق گوگل</a>
+                    <button><a href="{{ route('auth.google') }}" class="btn">ورود از طریق گوگل</a></button>
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

@@ -8,6 +8,13 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'bootstrap-rtl.min.scss';
 
+// Font-Awesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+
 body {
     font-family: 'Vazir', sans-serif;
 }

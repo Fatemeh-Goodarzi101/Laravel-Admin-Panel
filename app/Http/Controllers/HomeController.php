@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,7 +29,8 @@ class HomeController extends Controller
         ->setTitle('صفحه اصلی')
         ->setDescription('به وب سایت دیجی کالا خوش امدید');
 
-        return view('home');
+        $categories = Category::with('products')->get();
+        return view('pages.home' , compact('categories')); 
     }
 
     public function comment(Request $request)
