@@ -30,8 +30,17 @@
     </script>
 @endsection
 
-
 @section('content')
+    <div class="content-header">
+        <div class="row mr-2 ml-2" style="background-color:rgba(238, 203, 247, 0.973); border-radius: 3px">
+            <div class="col-lg-12">
+                <ul class="breadcrumb float-sm-right" style="margin: 0 ; background-color:rgba(238, 203, 247, 0.973);">
+                    <li class="breadcrumb-item"><a href="/home">صفحه اصلی</a></li>
+                    <li class="breadcrumb-item active">سبد خرید</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="container px-3 my-5 clearfix">
         <!-- Shopping cart table -->
         <div class="card">
@@ -140,25 +149,29 @@
                     <div class="d-flex">
                         <div class="text-right mt-4">
                             <label class="text-muted font-weight-normal m-0">قیمت کل</label>
-                            @php
-                                $totalPrice = Cart::all()->sum(function($cart) {
-                                    return $cart['discount_percent'] == 0 
-                                          ? $cart['product']->price * $cart['quantity']
-                                          : ( $cart['product']->price - ($cart['product']->price * $cart['discount_percent']) ) * $cart['quantity'];
-                                });
-                            @endphp
-                            <div class="text-large"><strong>{{ $totalPrice }} تومان</strong></div>
+                            @if (isset($cart['product'])) 
+                                @php
+                                    $totalPrice = Cart::all()->sum(function($cart) {
+                                        return $cart['discount_percent'] == 0 
+                                            ? $cart['product']->price * $cart['quantity'] 
+                                            : ( $cart['product']->price - ($cart['product']->price * $cart['discount_percent']) ) * $cart['quantity'];
+                                    });
+                                @endphp
+                                <div class="text-large"><strong>{{ $totalPrice }} تومان</strong></div>
+                            @else 
+                                <div class="text-large"><strong>0 تومان</strong></div>
+                            @endif
                         </div>
                     </div>
                 </div>
-
+                @if (isset($cart['product'])) 
                 <div class="float-left">
                     <form action="{{ route('cart.payment') }}" id="cart-payment" method="post">
                         @csrf
                     </form>
                     <button onclick="document.getElementById('cart-payment').submit()" type="button" class="btn btn-lg btn-primary mt-2">پرداخت</button>
                 </div>
-
+                @endif
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 @component('admin.layouts.content' , ['title' => 'دسترسی ها'])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
-        <li class="breadcrumb-item active">دسترسی ها</li>
+        <li class="breadcrumb-item active">لیست دسترسی ها</li>
     @endslot
     
     <div class="row">
@@ -20,9 +20,9 @@
                     </div>
                   </div>
                 </form>
-                <div class="btn-group-sm mr-2">
+                <div class="btn-group btn-group-sm mr-2">
                   @can('create-permission')
-                    <a href="{{ route('admin.permissions.create') }}" class="btn btn-info">ایجاد دسترسی جدید</a>
+                    <button><a href="{{ route('admin.permissions.create') }}">ایجاد دسترسی جدید</a></button>
                   @endcan
                 </div>
               </div>

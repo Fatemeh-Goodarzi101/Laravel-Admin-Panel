@@ -20,12 +20,12 @@
                     </div>
                   </div>
                 </form>
-                <div class="btn-group-sm mr-2">
+                <div class="btn-group btn-group-sm mr-2">
                   @can('create-user')
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-info">ایجاد کاربر جدید</a>  
+                    <button style="margin-left: 4px;"><a href="{{ route('admin.users.create') }}">ایجاد کاربر جدید</a></button>
                   @endcan
                   @can('show-staff-users')
-                    <a href="{{ request()->fullUrlWithQuery(['admin' => 1]) }}" class="btn btn-warning">کاربران مدیر</a>
+                    <button><a href="{{ request()->fullUrlWithQuery(['admin' => 1]) }}">کاربران مدیر</a></button>
                   @endcan
                 </div>
               </div>

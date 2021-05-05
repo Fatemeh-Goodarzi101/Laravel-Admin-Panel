@@ -20,9 +20,9 @@
                     </div>
                   </div>
                 </form>
-                <div class="btn-group-sm mr-2">
+                <div class="btn-group btn-group-sm mr-2">
                   {{-- @can('create-discount') --}}
-                    <a href="{{ route('admin.discounts.create') }}" class="btn btn-info">ایجاد تخفیف جدید</a>  
+                    <button><a href="{{ route('admin.discounts.create') }}">ایجاد تخفیف جدید</a>  </button>
                   {{-- @endcan --}}
                 </div>
               </div>

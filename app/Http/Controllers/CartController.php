@@ -10,7 +10,7 @@ class CartController extends Controller
 {
     public function cart()
     {
-        return view('home.cart');
+        return view('pages.cart');
     }
 
     public function addToCart(Product $product)
@@ -29,7 +29,6 @@ class CartController extends Controller
                 $product
             );
         }
-        
         return redirect('/cart');
     }
 

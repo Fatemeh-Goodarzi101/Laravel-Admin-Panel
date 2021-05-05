@@ -1,6 +1,7 @@
 @component('admin.layouts.content' , ['title' => 'لیست پرداخت‌ها'])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.orders.index') }}">لیست سفارشات</a></li>
         <li class="breadcrumb-item active">سفارش شماره {{ $order->id }} </li>
         <li class="breadcrumb-item active">لیست پرداخت‌ها</li>
     @endslot

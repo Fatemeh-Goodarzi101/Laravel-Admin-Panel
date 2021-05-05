@@ -1,7 +1,7 @@
 @component('admin.layouts.content' , ['title' => 'ایجاد دسترسی'])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.permissions.index') }}">همه دسترسی ها</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.permissions.index') }}">لیست دسترسی ها</a></li>
         <li class="breadcrumb-item active">ایجاد دسترسی</li>
     @endslot
 

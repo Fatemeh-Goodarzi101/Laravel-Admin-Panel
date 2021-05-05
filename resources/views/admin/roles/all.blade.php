@@ -1,7 +1,7 @@
 @component('admin.layouts.content' , ['title' => 'گروه ها'])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
-        <li class="breadcrumb-item active">گروه ها</li>
+        <li class="breadcrumb-item active">لیست گروه ها</li>
     @endslot
     
     <div class="row">
@@ -20,9 +20,9 @@
                     </div>
                   </div>
                 </form>
-                <div class="btn-group-sm mr-2">
+                <div class="btn-group btn-group-sm mr-2">
                   @can('create-role')
-                    <a href="{{ route('admin.roles.create') }}" class="btn btn-info">ایجاد گروه جدید</a>
+                    <button><a href="{{ route('admin.roles.create') }}" >ایجاد گروه جدید</a></button>
                   @endcan
                 </div>
               </div>

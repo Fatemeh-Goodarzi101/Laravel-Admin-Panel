@@ -1,7 +1,7 @@
 @component('admin.layouts.content' , ['title' => 'ویرایش دسته بندی'])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">لیست دسته بندی ها</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.categories.index') }}">لیست دسته بندی ها</a></li>
         <li class="breadcrumb-item active">ویرایش دسته بندی</li>
     @endslot
 

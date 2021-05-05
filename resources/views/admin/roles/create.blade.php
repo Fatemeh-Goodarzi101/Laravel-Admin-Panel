@@ -1,7 +1,7 @@
 @component('admin.layouts.content' , ['title' => 'ایجاد گروه'])
     @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.permissions.index') }}">همه گروه ها</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">لیست گروه ها</a></li>
         <li class="breadcrumb-item active">ایجاد گروه</li>
     @endslot
 

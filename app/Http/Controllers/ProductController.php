@@ -22,7 +22,8 @@ class ProductController extends Controller
             $products = Product::latest()->get();
         }
 
-        return view('pages.categories' , compact('products' , 'category'));
+        $categories = Category::all();
+        return view('pages.categories' , compact('products' , 'category' , 'categories'));
     }
 
     public function single(Product $product)
@@ -30,7 +31,12 @@ class ProductController extends Controller
         $this->seo()
         ->setTitle('جزئیات محصول')
         ->setDescription('به وب سایت دیجی کالا خوش امدید');
-
-        return view('home.single-product' , compact('product'));
+       
+        $catId = $product->categories()->first()->id;
+        $relatedProducts = Product::query() ->whereHas('categories', function ($query) use($catId , $product) {
+            $query->where('id','=', $catId)->where('product_id' , '!=' , $product->id);
+        })->with('categories')->get();
+        
+        return view('pages.single-product' , compact('product' , 'relatedProducts'));
     }
 }

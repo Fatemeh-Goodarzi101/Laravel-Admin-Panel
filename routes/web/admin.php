@@ -34,6 +34,6 @@ Route::get('comments/unapproved' , [CommentController::class , 'unapproved'])->n
 Route::resource('categories' , CategoryController::class);
 
 Route::resource('orders' , OrderController::class);
-Route::get('orders/{order}/orders' , [OrderController::class , 'payments'])->name('orders.payments');
+Route::get('orders/{order}/payments' , [OrderController::class , 'payments'])->name('orders.payments');
 
 Route::resource('discounts' , DiscountController::class);

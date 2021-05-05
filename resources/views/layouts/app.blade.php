@@ -78,10 +78,22 @@
             </div>
         </nav>
         @include('layouts.navbar')
-        {{-- @include('layouts.list-categories' , ['categories' => \App\Models\Category::where('parent' , 0)->get()]) --}}
-        <main class="py-4">
-            @yield('content')
-        </main>
+
+        {{-- baner image --}}
+        <div>
+            <img src="/img/banner.jpg" class="banner-img" alt="banner">
+            <div class="banner-text">
+            <h2 style="font-size:50px">Online Shop</h2>
+            <p>Have a Nice Shopping</p>
+            </div>
+        </div>
+
+        <div style="display: flex;flex-direction:column">
+            <main class="py-4">
+                @yield('content')
+            </main>
+            @include('home.footer')
+        </div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     @include('sweet::alert')

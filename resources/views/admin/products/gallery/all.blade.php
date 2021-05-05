@@ -12,8 +12,8 @@
                     <h3 class="card-title">تصاویر</h3>
 
                     <div class="card-tools d-flex">
-                        <div class="btn-group-sm mr-1">
-                            <a href="{{ route('admin.products.gallery.create' , ['product' => $product->id]) }}" class="btn btn-info">ثبت تصویر جدید</a>
+                        <div class="btn-group btn-group-sm mr-1">
+                            <button><a href="{{ route('admin.products.gallery.create' , ['product' => $product->id]) }}">ثبت تصویر جدید</a></button>
                         </div>
                     </div>
                 </div>
