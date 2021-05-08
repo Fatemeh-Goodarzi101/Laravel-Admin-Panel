@@ -25,6 +25,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->seo()
+            ->setTitle('گروه بندی')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $roles = Role::query();
         if( $keyword = request('search') ){
             $roles->where('name' , 'LIKE' , "%{$keyword}%")->orWhere('lable' , 'LIKE' , "%{$keyword}%");
@@ -60,7 +64,7 @@ class RoleController extends Controller
 
         $role = Role::create($data);
         $role->permissions()->sync($data['permissions']);
-        
+
         alert()->success('مطلب مورد نظر شما با موفقیت ایجاد شد');
 
         return redirect(route('admin.roles.index'));
@@ -105,7 +109,7 @@ class RoleController extends Controller
 
         $role->update($data);
         $role->permissions()->sync($data['permissions']);
-        
+
         alert()->success('مطلب مورد نظر شما با موفقیت ویرایش شد');
 
         return redirect(route('admin.roles.index'));
@@ -121,7 +125,7 @@ class RoleController extends Controller
     {
         $role->delete();
         alert()->success('مطلب مورد نظر شما با موفقیت حذف شد');
-        
+
         return back();
     }
 }

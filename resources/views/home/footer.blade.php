@@ -1,5 +1,6 @@
 <!-- Footer -->
-<footer class="page-footer font-small indigo"  style="background-color:rgba(233, 208, 240, 0.973);">
+<br><br>
+<footer class="page-footer font-small indigo">
     <div class="container text-center text-md-right">
       <div class="row">
 
@@ -17,12 +18,12 @@
             </li>
           </ul>
         </div>
-        
+
         <div class="col-md-3 mt-1 mx-auto">
-  
+
           <!-- Links -->
           <h6 class="font-weight-bold text-uppercase mt-3 mb-4">دسترسی سریع</h6>
-  
+
           <ul class="list-unstyled">
             <li>
               <a href="#!">صفحه اصلی</a>
@@ -34,7 +35,7 @@
               <a href="#!">درباره ما</a>
             </li>
           </ul>
-  
+
         </div>
 
         <div class="col-md-3 mt-1 mx-auto">
@@ -54,11 +55,11 @@
         <div class="col-md-3 mx-auto">
             <img src="/img/enamad.jpg" alt="enamd" style="width: 150px; float: left;">
         </div>
-  
+
       </div>
     </div>
-    <div class="footer-copyright text-right mr-2 py-3">تمامی قوانین این سایت متعلق به 
-      <a href="https://fatemehgoodarzi.com/">فاطمه گودرزی</a>
+    <div class="footer-copyright text-center mr-2 py-3">تمامی قوانین این سایت متعلق به
+      <a target="_blank" href="https://fatemehgoodarzi.com/">فاطمه گودرزی</a>
       می باشد.
     </div>
 </footer>

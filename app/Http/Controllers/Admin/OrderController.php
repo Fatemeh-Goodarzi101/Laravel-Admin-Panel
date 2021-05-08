@@ -16,6 +16,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $this->seo()
+            ->setTitle('سفارشات')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $orders = Order::query();
 
         if($search = \request('search')){
@@ -66,10 +70,10 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $data = $this->validate($request ,[
-            'status' => 'required' , Rule::in(['unpaid' , 'paid' , 'preparation' , 'posted' , 'received' , 'canceled']) , 
+            'status' => 'required' , Rule::in(['unpaid' , 'paid' , 'preparation' , 'posted' , 'received' , 'canceled']) ,
             'tracking_serial' => 'required|numeric'
         ]);
-        
+
         $order->update($data);
         alert()->success('سفارش با موفقیت ویرایش شد');
 

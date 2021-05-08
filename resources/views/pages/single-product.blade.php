@@ -36,7 +36,7 @@
                 success : function(data) {
                 }
             })
-        
+
         })
     </script>
 @endsection
@@ -106,14 +106,14 @@
                         </div>
                         <div class="card-body">
                             @if ($product->categories)
-                                دسته بندی محصول : 
+                                دسته بندی محصول :
                                 @foreach ($product->categories as $cat)
                                     <a href="#">{{ $cat->name }}</a>
                                 @endforeach
                             @endif
                             <hr>
                             <div class="card-title">
-                                درباره محصول 
+                                درباره محصول
                             </div>
                             <p class="card-text">توضیح فروشنده : {{ $product->description }} </p>
                             <p class="card-text">قیمت : {{ $product->price }} هزار تومان</p>
@@ -135,13 +135,13 @@
                         <button><a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#sendComment" data-id="0">ثبت نظر جدید</a></button>
                     @endauth
                 </div>
- 
+
                 @guest
                     <div class="alert alert-warning">
                         برای ثبت نظر لطفا وارد سایت شوید.
                     </div>
                 @endguest
-               @include('layouts.comments' , ['comments' => $product->comments()->where('parent_id' , 0)->get()])
+               @include('layouts.comments' , ['comments' => $product->comments()->where('parent_id' , 0)->where('approved' , 1)->get()])
             </div>
         </div>
 

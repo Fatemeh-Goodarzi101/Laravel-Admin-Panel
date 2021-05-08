@@ -16,6 +16,10 @@ class ProductGalleryController extends Controller
      */
     public function index(Product $product)
     {
+        $this->seo()
+            ->setTitle('تصاویر')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $images = $product->gallery()->latest()->paginate(10);
         return view('admin.products.gallery.all' , compact('product' , 'images'));
     }
@@ -42,8 +46,8 @@ class ProductGalleryController extends Controller
             'images.*.image' => 'required',
             'images.*.alt' => 'required|min:3'
         ]);
-         
-        collect($validData['images'])->each(function($image) use($product) { 
+
+        collect($validData['images'])->each(function($image) use($product) {
             $product->gallery()->create($image);
         });
 
@@ -75,7 +79,7 @@ class ProductGalleryController extends Controller
             'image' => 'required',
             'alt' => 'required|min:3'
         ]);
-        
+
         $gallery->update($validData);
         alert()->success('تصویر محصول مورد نظر با موفقیت ویرایش شد');
 

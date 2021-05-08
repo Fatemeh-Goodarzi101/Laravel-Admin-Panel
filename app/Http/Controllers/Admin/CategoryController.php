@@ -15,6 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->seo()
+            ->setTitle('دسته بندی')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $categories = Category::whereNotIn('parent', [0,'null'])->orWhere('parent', 0)->latest()->paginate(10);
         return view('admin.categories.all' , compact('categories'));
     }
@@ -118,5 +122,5 @@ class CategoryController extends Controller
         alert()->success('دسته مورد نظر با موفقیت حذف شد');
         return back();
     }
-    
+
 }

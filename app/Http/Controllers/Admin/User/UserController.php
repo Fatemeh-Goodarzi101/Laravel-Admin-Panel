@@ -45,6 +45,10 @@ class UserController extends Controller
         }
 
         $users =$users->paginate(10);
+        $this->seo()
+            ->setTitle('کاربران')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         return view('admin.users.all' , compact('users'));
     }
 

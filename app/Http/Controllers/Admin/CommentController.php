@@ -15,6 +15,10 @@ class CommentController extends Controller
      */
     public function index()
     {
+        $this->seo()
+            ->setTitle('نظرات')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $comments = Comment::query();
         if( $keyword = request('search') ){
             $comments->where('comment' , 'LIKE' , "%{$keyword}%")->orWhereHas('user' , function($query) use ($keyword) {
@@ -29,6 +33,10 @@ class CommentController extends Controller
 
     public function unapproved()
     {
+        $this->seo()
+            ->setTitle('نظرات')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $comments = Comment::query();
         if( $keyword = request('search') ){
             $comments->where('comment' , 'LIKE' , "%{$keyword}%")->orWhereHas('user' , function($query) use ($keyword) {
@@ -50,8 +58,8 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $comment->update([ 'approved' => 1 ]);
-        alert()->success('نظر با موفقیت تایید شد');  
-        return back();  
+        alert()->success('نظر با موفقیت تایید شد');
+        return back();
     }
 
     /**
@@ -66,5 +74,5 @@ class CommentController extends Controller
         alert()->success('نظر با موفقیت حذف شد');
         return back();
     }
-    
+
 }

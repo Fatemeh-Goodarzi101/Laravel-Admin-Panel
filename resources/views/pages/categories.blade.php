@@ -13,8 +13,8 @@
     </div>
 </div>
 
-<div class="container-fluid mt-1">
-    <div class="col-lg-4 float-right">
+<div class="container-fluid mt-3">
+    <div class="col-lg-3 float-right">
         <div class="card rounded">
             <div class="card-body">
                 <h6 class="card-title mb-2">جستجو</h6>
@@ -40,9 +40,9 @@
             </div><!--end blog post-->
         </div>
     </div>
-    <div class="col-lg-8 float-left">
+    <div class="col-lg-9 float-left">
         @foreach ($products as $product)
-            <div class="col-lg-4 float-left" style="padding: 5px 25px 25px">
+            <div class="col-lg-4 float-right pb-3">
                 <div class="card card-block">
                     <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->title }}">
                     <div class="card-body">

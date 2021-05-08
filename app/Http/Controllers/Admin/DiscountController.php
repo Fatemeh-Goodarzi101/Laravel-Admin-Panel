@@ -16,6 +16,10 @@ class DiscountController extends Controller
      */
     public function index()
     {
+        $this->seo()
+            ->setTitle('تخفیفات')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $discounts = Discount::latest()->paginate(10);
         return view('admin.discounts.all' , compact('discounts'));
     }
@@ -44,7 +48,7 @@ class DiscountController extends Controller
             'categories' => 'nullable|array|exists:categories,id',
             'expired_at' => 'required'
         ]);
-        
+
         $discount = Discount::create($valiData);
 
         $discount->users()->attach($valiData['users']);
@@ -81,21 +85,21 @@ class DiscountController extends Controller
             'categories' => 'nullable|array|exists:categories,id',
             'expired_at' => 'required'
         ]);
-        
+
         $discount->update($valiData);
-        
+
         isset($valiData['users'])
             ? $discount->users()->sync($valiData['users'])
             : $discount->users()->detach();
-        
+
         isset($valiData['categories'])
             ? $discount->categories()->sync($valiData['categories'])
             : $discount->categories()->detach();
-        
+
         isset($valiData['products'])
             ? $discount->products()->sync($valiData['products'])
             : $discount->products()->detach();
-        
+
         return redirect(route('admin.discounts.index'));
     }
 

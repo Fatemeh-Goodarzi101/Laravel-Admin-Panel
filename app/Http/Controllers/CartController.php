@@ -10,13 +10,17 @@ class CartController extends Controller
 {
     public function cart()
     {
+        $this->seo()
+            ->setTitle('سبد خرید')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         return view('pages.cart');
     }
 
     public function addToCart(Product $product)
     {
         $cart = Cart::instance('cart-digikala');
-        
+
         if($cart->has($product)) {
             if($cart->count($product) < $product->inventory)
                 $cart->update($product , 1);
@@ -39,9 +43,9 @@ class CartController extends Controller
             'id' => 'required',
             'cart' => 'required'
         ]);
-        
+
         $cart = Cart::instance($data['cart']);
-        
+
 
         if($cart->has($data['id']) ) {
 

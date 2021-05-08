@@ -25,6 +25,10 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        $this->seo()
+            ->setTitle('دسترسی')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         $permissions = Permission::query();
         if( $keyword = request('search') ){
             $permissions->where('name' , 'LIKE' , "%{$keyword}%")->orWhere('lable' , 'LIKE' , "%{$keyword}%");
@@ -56,10 +60,10 @@ class PermissionController extends Controller
             'name' => ['required', 'string', 'max:255' , 'unique:permissions'],
             'lable' => ['required', 'string', 'max:255'],
         ]);
-        
+
         Permission::create($data);
         alert()->success('مطلب مورد نظر شما با موفقیت ایجاد شد');
-        
+
         return redirect(route('admin.permissions.index'));
     }
 
@@ -82,7 +86,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        return view('admin.permissions.edit' , compact('permission')); 
+        return view('admin.permissions.edit' , compact('permission'));
     }
 
     /**
@@ -97,12 +101,12 @@ class PermissionController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255' , Rule::unique('permissions')->ignore($permission->id)],
             'lable' => ['required', 'string', 'max:255'],
-            
+
         ]);
 
         $permission->update($data);
         alert()->success('مطلب مورد نظر شما با موفقیت ویرایش شد');
-        
+
         return redirect(route('admin.permissions.index'));
     }
 

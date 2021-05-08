@@ -25,6 +25,11 @@ class ProductController extends Controller
         }
 
         $products =$products->latest()->paginate(10);
+
+        $this->seo()
+            ->setTitle('محصولات')
+            ->setDescription('به وب سایت دیجی کالا خوش امدید');
+
         return view('admin.products.all' , compact('products'));
     }
 
@@ -99,7 +104,7 @@ class ProductController extends Controller
             'attributes' => 'array',
             // 'image' => 'required'
         ]);
-    
+
         Storage::disk('public')->putFileAs('files' , $request->file('file') , $request->file('file')->getClientOriginalName());
         return 'ok';
 
@@ -110,7 +115,7 @@ class ProductController extends Controller
 
         if(isset($validData['attributes']))
             $this->attachAttributesToProduct($product , $validData);
-        
+
         alert()->success('محصول مورد نظر با موفقیت ویرایش شد' , 'با تشکر');
 
         return redirect(route('admin.products.index'));
@@ -126,7 +131,7 @@ class ProductController extends Controller
     {
         $product->delete();
         alert()->success('محصول مورد نظر با موفقیت حذف شد' , 'با تشکر');
-        
+
         return back();
     }
 
@@ -145,7 +150,7 @@ class ProductController extends Controller
             ]);
 
             $product->attributes()->attach($attr->id , ['value_id' => $attr_value->id ]);
-            
+
         });
     }
 }

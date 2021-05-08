@@ -8,9 +8,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('home') }}"><i class="fas fa-home"></i>صفحه اصلی</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">وبلاگ</a>
-          </li>
           <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 دسته بندی محصولات
@@ -20,12 +17,6 @@
                 <a style="text-align:right" class="dropdown-item" href="{{ route('category' , $category->id) }}">{{ $category->name }}</a>
               @endforeach
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">درباره ما</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1">تماس با ما</a>
           </li>
         </ul>
         <form class="d-flex">
